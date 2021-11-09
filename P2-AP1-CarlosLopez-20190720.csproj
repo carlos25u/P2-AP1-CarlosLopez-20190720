@@ -50,7 +50,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="DATA\Proyectos.db">
+    <None Update="DATA\proyecto.db">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

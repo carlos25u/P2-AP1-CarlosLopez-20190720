@@ -42,7 +42,14 @@
             </StackPanel>
 
             <StackPanel HorizontalAlignment="Left" Margin="0,10,0,0">
-                <DataGrid x:Name="DatosDataDrid" Height="290" Width="435"></DataGrid>
+                <DataGrid x:Name="DatosDataDrid" Height="290" Width="435" AutoGenerateColumns="False">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Id" Binding="{Binding ProyectoId}"></DataGridTextColumn>
+                        <DataGridTextColumn Header="Fecha" Binding="{Binding Fecha}"></DataGridTextColumn>
+                        <DataGridTextColumn Header="Descripcion" Binding="{Binding Descripcion}"></DataGridTextColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+                
             </StackPanel>
 
         </StackPanel>

@@ -40,6 +40,10 @@ namespace P2_AP1_CarlosLopez_20190720.BLL
 
             try
             {
+                foreach (var tarea in proyecto.Detalle)
+                {
+                    contexto.Entry(tarea).State = EntityState.Modified;
+                }
                 contexto.Proyectos.Add(proyecto);
                 paso = contexto.SaveChanges() > 0;
             }

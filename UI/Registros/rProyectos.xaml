@@ -50,7 +50,7 @@
                 </Button>
             </StackPanel>
 
-            <DataGrid x:Name="DetalleDataGrid" Margin="0,5,0,0" Height="250" ItemsSource="{Binding Detalle}" IsEnabled="True">
+            <DataGrid x:Name="DetalleDataGrid" Margin="0,5,0,0" Height="250" ItemsSource="{Binding Detalle}" IsEnabled="True" AutoGenerateColumns="False">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Tipo id" Binding="{Binding TiposTareas.TipoId}"></DataGridTextColumn>
                     <DataGridTextColumn Header="tipo de tarea" Binding="{Binding TiposTareas.TipoTarea}"></DataGridTextColumn>
