@@ -67,7 +67,10 @@ namespace P2_AP1_CarlosLopez_20190720.UI.Registros
             {
                 ProyectoId = proyecto.ProyectoId,
                 TiposTareas = (TiposTareas)TipotareasComboBox.SelectedItem
+                
             });
+
+            Cargar();
         }
 
         private void RemoverButton_Click(object sender, RoutedEventArgs e)
