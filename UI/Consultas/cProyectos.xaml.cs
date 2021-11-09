@@ -28,7 +28,35 @@ namespace P2_AP1_CarlosLopez_20190720.UI.Consultas
 
         private void consultarButton_Click(object sender, RoutedEventArgs e)
         {
-            
+            var listado = new List<Proyectos>();
+
+            if(filtroTextBox.Text.Trim().Length > 0)
+            {
+                switch (filtroComboBox.SelectedIndex)
+                {
+                    case 0:
+                        listado = ProyectosBLL.GetList(e => e.ProyectoId == Utilidades.ToInt(filtroTextBox.Text));
+                        break;
+                    case 1:
+                        listado = ProyectosBLL.GetList(e => e.Descripcion.ToLower().Contains(filtroTextBox.Text.ToLower()));
+                        break;
+                }
+            }
+            else
+            {
+                listado = ProyectosBLL.GetList(c => true);
+            }
+
+            if (desdeDatePicker.SelectedDate != null)
+                listado = ProyectosBLL.GetList(c => c.Fecha.Date >= desdeDatePicker.SelectedDate);
+
+            if (hastaDatePicker.SelectedDate != null)
+                listado = ProyectosBLL.GetList(c => c.Fecha.Date <= hastaDatePicker.SelectedDate);
+
+            DatosDataDrid.ItemsSource = null;
+            DatosDataDrid.ItemsSource = listado;
+
+
         }
     }
 }

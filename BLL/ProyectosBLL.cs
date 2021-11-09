@@ -43,7 +43,7 @@ namespace P2_AP1_CarlosLopez_20190720.BLL
                 contexto.Proyectos.Add(proyecto);
                 paso = contexto.SaveChanges() > 0;
             }
-            catch (Exception)
+            catch(Exception)
             {
                 throw;
             }
@@ -62,10 +62,11 @@ namespace P2_AP1_CarlosLopez_20190720.BLL
 
             try
             {
+                contexto.Database.ExecuteSqlRaw($"DELETE FROM ProyectoDetalle WHERE ProyectoId = {proyecto.ProyectoId}");
                 contexto.Entry(proyecto).State = EntityState.Modified;
                 paso = contexto.SaveChanges() > 0;
             }
-            catch (Exception)
+            catch(Exception)
             {
                 throw;
             }
@@ -79,7 +80,7 @@ namespace P2_AP1_CarlosLopez_20190720.BLL
 
         public static bool Guardar(Proyectos proyecto)
         {
-            if (Existe(proyecto.ProyectoId))
+            if (!Existe(proyecto.ProyectoId))
                 return Insertar(proyecto);
             else
                 return Modificar(proyecto);
@@ -94,7 +95,7 @@ namespace P2_AP1_CarlosLopez_20190720.BLL
             {
                 proyecto = contexto.Proyectos.Include(x => x.Detalle).Where(p => p.ProyectoId == id).SingleOrDefault();
             }
-            catch (Exception)
+            catch(Exception)
             {
                 throw;
             }
