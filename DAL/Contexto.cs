@@ -14,7 +14,7 @@ namespace P2_AP1_CarlosLopez_20190720.DAL
         public DbSet<Proyectos> Proyectos { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlite(@"Data Source = DATA\proyecto.db");
+            optionsBuilder.UseSqlite(@"Data Source = DATA\proyectoDetalle.db");
 
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)

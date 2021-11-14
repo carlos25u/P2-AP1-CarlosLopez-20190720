@@ -40,12 +40,17 @@ namespace P2_AP1_CarlosLopez_20190720.BLL
 
             try
             {
-                foreach (var tarea in proyecto.Detalle)
-                {
-                    contexto.Entry(tarea).State = EntityState.Modified;
-                }
+
                 contexto.Proyectos.Add(proyecto);
+
+                foreach (var detalle in proyecto.Detalle)
+                {
+                    contexto.Entry(detalle).State = EntityState.Added;
+                    contexto.Entry(detalle.TiposTareas).State = EntityState.Modified;
+                }
+
                 paso = contexto.SaveChanges() > 0;
+
             }
             catch(Exception)
             {
@@ -66,7 +71,22 @@ namespace P2_AP1_CarlosLopez_20190720.BLL
 
             try
             {
-                contexto.Database.ExecuteSqlRaw($"DELETE FROM ProyectoDetalle WHERE ProyectoId = {proyecto.ProyectoId}");
+                var proyectoAnterior = contexto.Proyectos
+                     .Where(x => x.ProyectoId == proyecto.ProyectoId)
+                     .Include(x => x.Detalle)
+                     .ThenInclude(x => x.TiposTareas)
+                     .AsNoTracking()
+                     .SingleOrDefault();
+
+                contexto.Database.ExecuteSqlRaw($"Delete FROM ProyectoDetalle where ProyectoId={proyecto.ProyectoId}");
+
+                foreach (var item in proyecto.Detalle)
+                {
+                    contexto.Entry(item).State = EntityState.Added;
+                    contexto.Entry(item.TiposTareas).State = EntityState.Modified;
+
+                }
+
                 contexto.Entry(proyecto).State = EntityState.Modified;
                 paso = contexto.SaveChanges() > 0;
             }
@@ -97,7 +117,11 @@ namespace P2_AP1_CarlosLopez_20190720.BLL
 
             try
             {
-                proyecto = contexto.Proyectos.Include(x => x.Detalle).Where(p => p.ProyectoId == id).SingleOrDefault();
+                proyecto = contexto.Proyectos.Include(x => x.Detalle)
+                    .Where(x => x.ProyectoId == id)
+                    .Include(x => x.Detalle)
+                    .ThenInclude(x => x.TiposTareas)
+                    .SingleOrDefault();
             }
             catch(Exception)
             {
@@ -119,6 +143,14 @@ namespace P2_AP1_CarlosLopez_20190720.BLL
             try
             {
                 var proyecto = contexto.Proyectos.Find(id);
+
+                foreach (var item in proyecto.Detalle)
+                {
+                    contexto.Entry(item.Proyectos).State = EntityState.Modified;
+                    contexto.Entry(item.TiposTareas).State = EntityState.Modified;
+                }
+
+                
                 contexto.Entry(proyecto).State = EntityState.Deleted;
 
                 paso = contexto.SaveChanges() > 0;

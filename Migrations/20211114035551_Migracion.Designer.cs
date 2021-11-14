@@ -9,8 +9,8 @@ using P2_AP1_CarlosLopez_20190720.DAL;
 namespace P2_AP1_CarlosLopez_20190720.Migrations
 {
     [DbContext(typeof(Contexto))]
-    [Migration("20211109201643_Reparando la base de datos")]
-    partial class Reparandolabasededatos
+    [Migration("20211114035551_Migracion")]
+    partial class Migracion
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -108,7 +108,7 @@ namespace P2_AP1_CarlosLopez_20190720.Migrations
 
             modelBuilder.Entity("P2_AP1_CarlosLopez_20190720.Entidades.ProyectoDetalle", b =>
                 {
-                    b.HasOne("P2_AP1_CarlosLopez_20190720.Entidades.Proyectos", null)
+                    b.HasOne("P2_AP1_CarlosLopez_20190720.Entidades.Proyectos", "Proyectos")
                         .WithMany("Detalle")
                         .HasForeignKey("ProyectoId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -119,6 +119,8 @@ namespace P2_AP1_CarlosLopez_20190720.Migrations
                         .HasForeignKey("TipoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Proyectos");
 
                     b.Navigation("TiposTareas");
                 });

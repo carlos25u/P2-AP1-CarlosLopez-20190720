@@ -17,5 +17,7 @@ namespace P2_AP1_CarlosLopez_20190720.Entidades
 
         [ForeignKey("TipoId")]
         public TiposTareas TiposTareas { get; set; }
+        public Proyectos Proyectos { get; set; }
+
     }
 }
