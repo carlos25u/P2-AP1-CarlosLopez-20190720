@@ -9,8 +9,8 @@ using P2_AP1_CarlosLopez_20190720.DAL;
 namespace P2_AP1_CarlosLopez_20190720.Migrations
 {
     [DbContext(typeof(Contexto))]
-    [Migration("20211114035551_Migracion")]
-    partial class Migracion
+    [Migration("20211117152537_Reparando base de datos")]
+    partial class Reparandobasededatos
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
